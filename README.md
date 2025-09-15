@@ -25,8 +25,8 @@ The system uses computer vision to recognize the chessboard and piece positions,
 ## Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/robotic-chess-arm.git
-cd robotic-chess-arm
+git clone https://github.com/whoisLePhuc/robotic-chess-playing-arm.git
+robotic-chess-playing-arm
 
 # Install dependencies
 pip install -r requirements.txt
