@@ -1,48 +1,48 @@
-/*
-#include <stdio.h>
-#include <stdlib.h>
-#include "chessboard.h"
+#include "common/chess_types.h"
+#include "ui/console_ui.h"
 
-int main() {
-    piece board[8][8];   // Coordinates (x,y) from left upper corner
-    init_chessboard(board);
-    print_chessboard(board);
-
-    printf("\nĐi e2e4:\n");
-    make_move(board, "e2e4");
-    print_chessboard(board);
-
-    printf("\nĐi e4c4:\n");
-    make_move(board, "e4c4");
-    print_chessboard(board);
-    return 0;
-}
-*/
-
-
-#include "chess_logic.h"
-#include <stdio.h>
-
-int main() {
-    if (uci_start("stockfish") != 0) {
-        printf("Không mở được Stockfish!\n");
-        return 1;
+int main(void) {
+    game_context_t ctx;
+    init_game_context(&ctx);
+    
+    printf("=== Professional Chess Game ===\n");
+    printf("Make sure a UCI engine (like Stockfish) is installed and in your PATH\n\n");
+    
+    // Main state machine loop
+    while (ctx.state != GAME_EXIT) {
+        switch (ctx.state) {
+            case GAME_MENU:
+                ctx.state = handle_menu_state(&ctx);
+                break;
+            case GAME_SETUP:
+                ctx.state = handle_setup_state(&ctx);
+                break;
+            case GAME_PLAYING:
+                ctx.state = handle_playing_state(&ctx);
+                break;
+            case GAME_ENGINE_THINKING:
+                ctx.state = handle_engine_thinking_state(&ctx);
+                break;
+            case GAME_WAITING_HUMAN:
+                ctx.state = handle_waiting_human_state(&ctx);
+                break;
+            case GAME_GAME_OVER:
+                ctx.state = handle_game_over_state(&ctx);
+                break;
+            case GAME_ERROR:
+                printf("Error: %s\n", ctx.status_message);
+                printf("Returning to menu...\n");
+                usleep(2000000); // 2 seconds
+                ctx.state = GAME_MENU;
+                break;
+            default:
+                printf("Unknown state, exiting...\n");
+                ctx.state = GAME_EXIT;
+                break;
+        }
     }
-
-    uci_send("uci");
-    uci_read_bestmove();   // chờ "uciok"
-
-    uci_newgame();
-
-    // Đặt vị trí ban đầu và cho engine tính
-    uci_send("position startpos moves e2e4");
-    uci_send("go depth 10");
-    const char *bm = uci_read_bestmove();
-
-    if (bm) {
-        printf("Bestmove từ Stockfish: %s\n", bm);
-    }
-
-    uci_stop();
+    
+    cleanup_game_context(&ctx);
+    printf("\nThanks for playing!\n");
     return 0;
 }

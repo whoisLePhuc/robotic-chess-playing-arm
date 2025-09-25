@@ -6,9 +6,12 @@ set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
 set(PROJECT_SOURCES
-    src/chessboard.c
-    src/chess_logic.c
-    src/vision_manager.c
+    src/engine/uci_engine.c
+    src/game/chess_state.c
+    src/game/move_validation.c
+    src/ui/board_display.c
+    src/ui/console_ui.c
+    src/utils/string_utils.c
     main.c
 )
 
