@@ -177,18 +177,14 @@ game_state_type_t handle_engine_thinking_state(game_context_t *ctx) {
 game_state_type_t handle_waiting_human_state(game_context_t *ctx) {
     printf("%s to move. Enter your move (e.g., e2e4), 'help', 'history', or 'quit': ", 
            (ctx->chess.turn == WHITE) ? "White" : "Black");
-    
     char input[64];
     if (!fgets(input, sizeof(input), stdin)) {
         return GAME_EXIT;
     }
-    
     char *move = trim_string(input);
-    
     if (strcmp(move, "quit") == 0) {
         return GAME_EXIT;
     }
-    
     if (strcmp(move, "help") == 0) {
         printf("\nHow to play:\n");
         printf("- Enter moves in UCI format: e2e4, g1f3, etc.\n");
@@ -197,12 +193,10 @@ game_state_type_t handle_waiting_human_state(game_context_t *ctx) {
         printf("- Commands: 'help', 'history', 'quit'\n\n");
         return GAME_WAITING_HUMAN;
     }
-    
     if (strcmp(move, "history") == 0) {
         print_move_history(&ctx->chess, 10);
         return GAME_WAITING_HUMAN;
     }
-    
     move_result_t result = make_move(&ctx->chess, move);
     switch (result) {
         case MOVE_SUCCESS:
@@ -229,7 +223,6 @@ game_state_type_t handle_waiting_human_state(game_context_t *ctx) {
             strcpy(ctx->status_message, "Move failed");
             break;
     }
-    
     return GAME_WAITING_HUMAN;
 }
 

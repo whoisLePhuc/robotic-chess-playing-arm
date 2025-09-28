@@ -5,9 +5,6 @@ int main(void) {
     game_context_t ctx;
     init_game_context(&ctx);
     
-    printf("=== Professional Chess Game ===\n");
-    printf("Make sure a UCI engine (like Stockfish) is installed and in your PATH\n\n");
-    
     // Main state machine loop
     while (ctx.state != GAME_EXIT) {
         switch (ctx.state) {

@@ -11,9 +11,9 @@ The system uses computer vision to recognize the chessboard and piece positions,
 - 🔄 **Integration**: Combines vision, logic, and actuation into a complete system.  
 
 ## Technologies
-- **Programming Languages**: Python / C++ (for control modules)  
+- **Programming Languages**: C++
 - **Libraries**: OpenCV, NumPy, [chess engine library e.g. python-chess]  
-- **Hardware**: Robotic arm (servo/stepper based), camera (webcam/USB), microcontroller (Arduino/ROS compatible)  
+- **Hardware**: Robotic arm (servo/stepper based), camera (webcam/USB), microcontroller
 
 ## System Architecture
 1. **Image Processing** → Capture and preprocess board image.  
@@ -28,6 +28,15 @@ The system uses computer vision to recognize the chessboard and piece positions,
 git clone https://github.com/whoisLePhuc/robotic-chess-playing-arm.git
 robotic-chess-playing-arm
 
-# Install dependencies
-pip install -r requirements.txt
+# go to build folder
+cd build
+
+# Run cmake
+cmake ..
+
+# run makefile
+make
+
+# Run file
+./robot_play_chess
 
