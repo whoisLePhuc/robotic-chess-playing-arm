@@ -38,7 +38,6 @@ int main(void) {
                 break;
         }
     }
-    
     cleanup_game_context(&ctx);
     printf("\nThanks for playing!\n");
     return 0;
