@@ -1,6 +1,10 @@
 #ifndef CHESS_TYPES_H
 #define CHESS_TYPES_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -103,5 +107,9 @@ typedef struct {
     bool game_over;
     color_t winner;
 } game_context_t;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

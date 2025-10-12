@@ -16,7 +16,7 @@ set(PROJECT_SOURCES
     src/ui/console_ui.c
     src/utils/string_utils.c
     src/vision/chess_move_detect.cpp
-    main.c
+    main.cpp
 )
 
 add_executable(robot_play_chess ${PROJECT_SOURCES})
